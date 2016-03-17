@@ -1,0 +1,3 @@
+Copy service file into the /etc/systemd/system.
+Start: systemctl start mqtt2sql.
+Enable at boot-up: systemctl enable mqtt2sql.
