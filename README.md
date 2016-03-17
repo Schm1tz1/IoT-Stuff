@@ -1,5 +1,4 @@
 #IoT-Stuff
-=========
 
 This is a collection of my scripts and configurations for IoT stuff: node.js, php, sql, python, mqtt...
 
