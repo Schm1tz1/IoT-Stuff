@@ -1,5 +1,8 @@
 #!/usr/bin/node
 
+// if modules are not found in a stardard path, add it here. example:
+// module.paths.push('/usr/lib/node_modules/');
+
 var mqtt = require('mqtt');
 var mysql  = require('mysql');
 
