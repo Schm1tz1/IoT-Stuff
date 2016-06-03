@@ -5,25 +5,32 @@
 
 var mqtt = require('mqtt');
 var mysql  = require('mysql');
+var conf = require('./config.js');
 
-var client = mqtt.connect( {host: 'localhost', port: '8883', username: 'xxx', password: 'xxx'} );
+var client = mqtt.connect( {host: conf.mqtthost, port: conf.mqttport, username: conf.mqttuser, password: conf.mqttpass} );
 
 var dbconn = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'xxx',
-  password : 'xxx',
-  database : 'xxx'
+  host     : conf.sqlhost,
+  user     : conf.sqluser,
+  password : conf.sqlpass,
+  database : conf.dbname
 });
 
 client.on('connect', function() {
-    client.subscribe('office/#', function() {
+    client.subscribe(conf.topic, function() {
         client.on('message', function(topic, message, packet) {
             console.log(topic + ": " + message);
-	    var sub = topic.split("/")[1];		
-            var query = dbconn.query('INSERT INTO office (topic,value) values (?, ?)', [sub, message], function(err) {
-		if (err) { 
-			console.log('Error in '+query.sql + err);}
-		});
+	    var sub = topic.split("/")[1];
+
+	    if( topic.match("/identification") == null) {
+              var query = dbconn.query('INSERT INTO office (topic,value) values (?, ?)', [sub, message], function(err) {
+  	      if (err) { 
+	        console.log('Error in '+query.sql + err);}
+	      });
+	    }
+	    else {
+	      console.log("message was skipped !");
+            }
         }); 
     }); 
 });
