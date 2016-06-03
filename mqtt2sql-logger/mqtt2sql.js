@@ -3,21 +3,21 @@
 var mqtt = require('mqtt');
 var mysql  = require('mysql');
 
-var client = mqtt.createClient(8883, "localhost", {username: "xxx", password: "xxx"});
+var client = mqtt.connect( {host: 'localhost', port: '8883', username: 'xxx', password: 'xxx'} );
 
 var dbconn = mysql.createConnection({
   host     : 'localhost',
-  user     : 'iot',
-  password : 'l2sql#4#iot',
-  database : 'iotdata'
+  user     : 'xxx',
+  password : 'xxx',
+  database : 'xxx'
 });
 
 client.on('connect', function() {
     client.subscribe('office/#', function() {
         client.on('message', function(topic, message, packet) {
             console.log(topic + ": " + message);
-	
-            var query = dbconn.query('INSERT INTO office (topic,value) values (?, ?)', [topic, message], function(err) {
+	    var sub = topic.split("/")[1];		
+            var query = dbconn.query('INSERT INTO office (topic,value) values (?, ?)', [sub, message], function(err) {
 		if (err) { 
 			console.log('Error in '+query.sql + err);}
 		});

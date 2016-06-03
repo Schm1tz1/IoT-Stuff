@@ -2,13 +2,13 @@
 Description=Node.js MQTT2SQL Logger
 
 [Service]
-ExecStart=/path-to-script/mqtt2sql.js
+ExecStart=/home/roman/iot/mqtt2sql.js
 Restart=always
 User=nobody
 Group=nobody
 Environment=PATH=/usr/bin:/usr/local/bin
 Environment=NODE_ENV=production
-WorkingDirectory=/path-to-script
+WorkingDirectory=/home/roman/iot
 
 [Install]
 WantedBy=multi-user.target
