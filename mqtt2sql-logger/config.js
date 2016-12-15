@@ -7,7 +7,6 @@ module.exports = {
   sqluser: "xxx",
   sqlpass: "xxx",
   dbname: "xxx",
-  dbtable: "xxx",
   mqtthost: "localhost",
   mqttport: "8883",
   mqttuser: "xxx",
