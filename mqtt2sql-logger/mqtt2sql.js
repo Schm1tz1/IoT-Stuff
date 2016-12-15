@@ -5,7 +5,7 @@ module.paths.push('/usr/lib/node_modules/');
 
 var mqtt = require('mqtt');
 var mysql  = require('mysql');
-var conf = require('./config-fsketzer.js');
+var conf = require('./config.js');
 
 var client = mqtt.connect( {host: conf.mqtthost, port: conf.mqttport, username: conf.mqttuser, password: conf.mqttpass} );
 
